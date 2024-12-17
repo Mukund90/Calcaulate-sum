@@ -1,34 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Understanding-Fetch-Api</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undersanding Dom object</title>
 </head>
 <body>
-    <h1>understanding fetch api</h1>
-   <div id ="name"></div>
-    <button onclick={getanimal_data()}>GetanimalData</button>
-    <script>
-        async function getanimal_data()
-        {
-          const response = await fetch('https://fakerapi.it/api/v1/persons');
-          if(response.ok)
-          {
-            const data = await response.json();
-            console.log(data)
-            const value = document.getElementById('name');
-            value.innerHTML=" ";
+<input  class ="number" type="number" placeholder="Enter first  Number">
+<br>
+<br>
+<input class="numbery" type="number" placeholder ="Enter  second number">
+<br>
+<br>
+<button onclick={handelsubmit()}>Calculate Sum</button>
+<div id="div">
+  
+</div>
 
-            data.data.forEach(element => {
-              const newlist = document.createElement('li')
-              newlist.textContent= `Name: ${element.firstname}`
-              value.append(newlist);
-            });
+<script>
+  async function handelsubmit()
+  {
+    const number = document.getElementsByClassName('number')[0];
+    const numberi = document.getElementsByClassName('numbery')[0];
 
-          }
-          
-        }
-    </script>
+    const isnumber = Number(number.value);
+    const dusreanumber = Number(numberi.value);
+
+
+    const extra =  document.getElementById('div')
+    const hero = document.createElement('p')
+    const sum = isnumber + dusreanumber;
+    
+   try{
+    await fetch(`http://localhost:3000/sum?number1=${isnumber}&number2=${dusreanumber}`)
+    .then((response)=>
+  {
+    return response.text();
+  }).then((data)=>
+{
+  console.log(data)
+  hero.innerText=`${data}`
+})
+extra.appendChild(hero)
+}catch(err)
+   {
+    console.log('something went wrong' + err)
+   }
+  
+  number.value = "";
+  numberi.value = "";
+
+  }
+</script>
 </body>
 </html>
