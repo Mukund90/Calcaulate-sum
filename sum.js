@@ -17,8 +17,7 @@ app.get('/sum',(req,res)=>
         res.status(400).send('Something went Wrong:')
     }})
 
-const port = 3000;
-app.listen(port,()=>
-{
-    console.log(`listening on port ${port}`)
-})
+   app.listen(3000, '0.0.0.0', () => {
+  console.log('listening on port 3000');
+});
+
